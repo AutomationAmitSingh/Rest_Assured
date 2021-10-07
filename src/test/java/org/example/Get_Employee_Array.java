@@ -6,10 +6,7 @@ import org.json.JSONObject;
 
 import static com.jayway.restassured.RestAssured.given;
 
-public class Get_Employee {
-
-    //Q1: Write a program to parse response data Employee Name of the 6th Record using JsonPath and
-    //Org.Json library
+public class Get_Employee_Array {
 
     public static void main(String[] args) {
 
@@ -19,10 +16,14 @@ public class Get_Employee {
                 .get("https://dummy.restapiexample.com/api/v1/employees");
 
         JSONObject jo = new JSONObject(rs.asString());
-        String employeeName = jo.getJSONArray("data").getJSONObject(0).get("employee_name").toString();
-        System.out.println(employeeName);
+        int sizeArray = jo.getJSONArray("data").length();
+        System.out.println(sizeArray);
+        for(int i = 0; i < sizeArray; i++)
+        {
+            String record = jo.getJSONArray("data").getJSONObject(i).get("employee_age").toString();
+            System.out.println(i+" "+record);
 
-
+        }
 
     }
 
